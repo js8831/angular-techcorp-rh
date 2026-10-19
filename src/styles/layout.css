@@ -1,0 +1,99 @@
+/* ==========================================================================
+   layout.css - Grandes zones de la page (a completer le jour 2)
+
+   A faire :
+   - .app : coquille applicative en CSS Grid (header, sidebar, main)
+   - .auth : mise en page des pages de connexion / inscription
+   - .page-header : titre de page + actions
+   - .grid-auto : grille de cartes responsive sans media query
+   Rappel : mobile-first, breakpoints 40em et 64em.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Coquille applicative (app shell)
+   Mobile  : en-tete + contenu, la navigation est un panneau qui s'ouvre.
+   Desktop : en-tete sur toute la largeur, barre laterale fixe a gauche.
+   -------------------------------------------------------------------------- */
+
+.container {
+  max-width: var(--content-max);
+  /* marge de gch et dt (inline) */
+  margin-inline: auto;
+}
+
+/* --------------------------------------------------------------------------
+   Pages d'authentification (connexion, inscription)
+   -------------------------------------------------------------------------- */
+
+.auth {
+  display: grid;
+  /*  La hauteur de l'ecran d'affichage (ecran visible du navigateur) prend 100% */
+  min-height: 100vh;
+}
+
+.auth__aside {
+  /* N'affiche pas la partie de gch pour toutes les tailles
+  Mais comme on est en mobile first la regle plus bas vient surcharger pour 
+  les grand ecrans !*/
+  display: none;
+}
+
+.auth__main {
+  display: grid;
+  /*  mix de align-items (flex et grid) et de justify-items (grid) */
+  place-items: center;
+  padding: var(--space-6) var(--space-4);
+}
+
+.auth__panel {
+  width: 100%;
+  max-width: 28rem;
+}
+
+@media (min-width: 64em) {
+  .auth {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .auth__aside {
+    /* On passe en flex des 64*16px et annule le display none*/
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: var(--space-7);
+    color: var(--color-on-primary);
+    background-color: var(--color-primary);
+  }
+}
+
+/* phrase d'accroche ou sous-titre */
+.auth__tagline {
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-semibold);
+  /* Interligne */
+  line-height: var(--leading-tight);
+}
+
+/* --------------------------------------------------------------------------
+   En-tete de page : titre a gauche, actions a droite (passent dessous sur mobile)
+   -------------------------------------------------------------------------- */
+
+/* --------------------------------------------------------------------------
+   Grilles reutilisables
+   -------------------------------------------------------------------------- */
+
+/* Autant de colonnes que possible, chacune d'au moins 13rem. Aucune media query. */
+.grid-auto {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+  gap: var(--space-4);
+}
+
+/* Empile des blocs avec un espacement regulier sauf sur le premier enfant. */
+.stack > * + * {
+  margin-top: var(--space-5);
+}
+
+.stack-sm > * + * {
+  margin-top: var(--space-3);
+}
