@@ -1,24 +1,16 @@
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * The content below * * * * * * * * * * * -->
-<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
-<!-- * * * * * * * * * * and can be replaced.  * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * Delete the template below * * * * * * * * * -->
-<!-- * * * * * * * to get started with your project! * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-
 <!doctype html>
 <html lang="fr">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Tableau de bord - TechCorp RH</title>
     <meta
       name="description"
-      content="Affichage de vos congés, votre matériel et de vos notes de frais. "
+      content="Résumé de vos congés, de votre matériel et de vos notes de frais."
     />
     <!-- Application interne : on demande aux moteurs de recherche de ne pas indexer. -->
     <meta name="robots" content="noindex, nofollow" />
+    <meta name="theme-color" content="#1d4ed8" />
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
     <!-- <link rel="stylesheet" href="css/main.css" /> -->
     <script src="js/app.js" defer></script>
@@ -26,11 +18,16 @@
   <body>
     <!-- Premier element focusable : permet de sauter la navigation au clavier. -->
     <a class="skip-link" href="#contenu">Aller au contenu principal</a>
+
     <div class="app">
-      <!----------------------------------- HEADER ----------------------------------->
-      <header class="topbar">
-        <!----------------------------------- HEADER - BUTTON ----------------------------------->
-        <button class="topbar__menu">
+      <header class="app__header topbar">
+        <button
+          class="topbar__menu"
+          type="button"
+          data-nav-toggle
+          aria-expanded="false"
+          aria-controls="navigation"
+        >
           <svg
             class="nav__icon"
             viewBox="0 0 24 24"
@@ -44,15 +41,13 @@
           >
             <path d="M4 6h16M4 12h16M4 18h16" />
           </svg>
+          <span class="sr-only">Ouvrir le menu</span>
         </button>
 
-        <!----------------------------------- HEADER - LOGO ----------------------------------->
-        <a href="dashboard-employe.html" class="brand">
-          <img class="brand__logo" src="assets/logo.svg" alt="Logo de TechCorp RH" />
+        <a class="brand" href="dashboard-employe.html">
+          <img class="brand__logo" src="assets/logo.svg" alt="" width="32" height="32" />
           TechCorp RH
         </a>
-
-        <!----------------------------------- HEADER - ACTION ----------------------------------->
 
         <div class="topbar__actions">
           <a class="icon-link" href="#">
@@ -71,10 +66,17 @@
               <path d="M10 21a2 2 0 0 0 4 0" />
             </svg>
             <span class="count" aria-hidden="true">3</span>
+            <span class="sr-only">Notifications, 3 non lues</span>
           </a>
-          <span class="avatar">CM</span>
-          <a class="icon-link" href="#"
-            ><svg
+          <div class="user">
+            <span class="avatar" aria-hidden="true">CM</span>
+            <div class="user__info">
+              <p class="user__name">{{ currentUser.firstName }} {{ currentUser.lastName }}</p>
+              <p class="user__role">{{ currentUser.jobTitle }}</p>
+            </div>
+          </div>
+          <a class="icon-link" href="login.html">
+            <svg
               class="nav__icon"
               viewBox="0 0 24 24"
               fill="none"
@@ -85,127 +87,292 @@
               aria-hidden="true"
               focusable="false"
             >
-              <path d="M15 4h4v16h-4M10 8l-4 4 4 4M6 12h10"></path>
+              <path d="M15 4h4v16h-4M10 8l-4 4 4 4M6 12h10" />
             </svg>
+            <span class="sr-only">Se déconnecter</span>
           </a>
         </div>
       </header>
 
-      <!----------------------------------- NAVBAR ----------------------------------->
-      <nav>
-        <h2>MON ESPACE</h2>
-        <ul>
-          <li>
-            <a href=""
-              ><svg
-                class="nav__icon"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
-                focusable="false"
-              >
-                <path d="M3 10.5 12 3l9 7.5V21h-6v-6H9v6H3z" />
-              </svg>
-              Tableau de bord</a
-            >
-          </li>
-          <li>
-            <a href=""
-              ><svg
-                class="nav__icon"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
-                focusable="false"
-              >
-                <rect x="3" y="5" width="18" height="16" rx="2" />
-                <path d="M3 10h18M8 3v4M16 3v4" />
-              </svg>
-              Mes congés</a
-            >
-          </li>
-          <li>
-            <a href="">
-              <svg
-                class="nav__icon"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
-                focusable="false"
-              >
-                <path d="M6 3h12v18l-3-2-3 2-3-2-3 2z" />
-                <path d="M9 8h6M9 12h6" />
-              </svg>
-              Notes de frais</a
-            >
-          </li>
-          <li>
-            <a href="">
-              <svg
-                class="nav__icon"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
-                focusable="false"
-              >
-                <rect x="4" y="5" width="16" height="11" rx="1" />
-                <path d="M2 19h20" />
-              </svg>
-              Matériel</a
-            >
-          </li>
-          <li>
-            <a href=""
-              ><svg
-                class="nav__icon"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
-                focusable="false"
-              >
-                <circle cx="12" cy="8" r="4" />
-                <path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8" />
-              </svg>
-              Mon profil</a
-            >
-          </li>
-        </ul>
+      <nav class="app__sidebar sidebar" id="navigation" aria-label="Navigation principale">
+        <div class="nav__section">
+          <h2 class="nav__heading" id="nav-perso">Mon espace</h2>
+          <ul class="nav" role="list" aria-labelledby="nav-perso">
+            <li>
+              <a class="nav__link" href="dashboard-employe.html" aria-current="page">
+                <svg
+                  class="nav__icon"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <path d="M3 10.5 12 3l9 7.5V21h-6v-6H9v6H3z" />
+                </svg>
+                Tableau de bord
+              </a>
+            </li>
+            <li>
+              <a class="nav__link" href="conges-demande.html">
+                <svg
+                  class="nav__icon"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <rect x="3" y="5" width="18" height="16" rx="2" />
+                  <path d="M3 10h18M8 3v4M16 3v4" />
+                </svg>
+                Mes congés
+              </a>
+            </li>
+            <li>
+              <a class="nav__link" href="note-frais-nouvelle.html">
+                <svg
+                  class="nav__icon"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <path d="M6 3h12v18l-3-2-3 2-3-2-3 2z" />
+                  <path d="M9 8h6M9 12h6" />
+                </svg>
+                Notes de frais
+              </a>
+            </li>
+            <li>
+              <a class="nav__link" href="tailwind/materiel-catalogue.html">
+                <svg
+                  class="nav__icon"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <rect x="4" y="5" width="16" height="11" rx="1" />
+                  <path d="M2 19h20" />
+                </svg>
+                Matériel
+              </a>
+            </li>
+            <li>
+              <a class="nav__link" href="profil.html">
+                <svg
+                  class="nav__icon"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <circle cx="12" cy="8" r="4" />
+                  <path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8" />
+                </svg>
+                Mon profil
+              </a>
+            </li>
+          </ul>
+        </div>
       </nav>
 
-      <!----------------------------------- MAIN ----------------------------------->
-
       <!-- tabindex="-1" : la cible du lien d'evitement peut recevoir le focus. -->
-      <main class="app__main" id="contenu" tabindex="-1"></main>
+      <main class="app__main" id="contenu" tabindex="-1">
+        <div class="container">
+          <div class="page-header">
+            <div>
+              <h1>Bonjour Claire</h1>
+              <p class="page-header__subtitle">
+                Voici le résumé de votre activité au 5 octobre 2026.
+              </p>
+            </div>
+            <div class="page-header__actions">
+              <a class="btn btn--secondary" href="note-frais-nouvelle.html"
+                >Nouvelle note de frais</a
+              >
+              <a class="btn btn--primary" href="conges-demande.html">
+                <svg
+                  class="btn__icon"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <path d="M12 5v14M5 12h14" />
+                </svg>
+                Demander un congé
+              </a>
+            </div>
+          </div>
+
+          <!-- Les indicateurs : une liste de cartes, autant de colonnes que la largeur le permet. -->
+          <section aria-labelledby="titre-soldes">
+            <h2 id="titre-soldes" class="sr-only">Mes soldes</h2>
+            <ul class="grid-auto list" role="list">
+              <li class="card stat">
+                <span class="stat__label">Congés payés restants</span>
+                <span class="stat__value">14 <span class="stat__unit">jours</span></span>
+                <div class="bar" aria-hidden="true">
+                  <div class="bar__fill" style="width: 56%"></div>
+                </div>
+                <span class="stat__hint">8 pris, 3 en attente, sur 25</span>
+              </li>
+              <li class="card stat">
+                <span class="stat__label">RTT restants</span>
+                <span class="stat__value">6 <span class="stat__unit">jours</span></span>
+                <div class="bar" aria-hidden="true">
+                  <div class="bar__fill" style="width: 60%"></div>
+                </div>
+                <span class="stat__hint">4 pris sur 10</span>
+              </li>
+              <li class="card stat">
+                <span class="stat__label">Notes de frais en attente</span>
+                <span class="stat__value">89,50 <span class="stat__unit">€</span></span>
+                <span class="stat__hint">1 note en cours de validation</span>
+              </li>
+              <li class="card stat">
+                <span class="stat__label">Matériel attribué</span>
+                <span class="stat__value">3 <span class="stat__unit">équipements</span></span>
+                <span class="stat__hint">Dernière attribution le 2 mars 2026</span>
+              </li>
+            </ul>
+          </section>
+
+          <div class="grid-split mt-5">
+            <section class="card" aria-labelledby="titre-absences">
+              <div class="card__header">
+                <h2 id="titre-absences" class="card__title">Mes prochaines absences</h2>
+                <a href="conges-demande.html" class="text-sm">Tout voir</a>
+              </div>
+              <ul class="list" role="list">
+                <li class="list__item">
+                  <div>
+                    <p class="font-semibold">Congés payés, 5 jours</p>
+                    <p class="list__meta">
+                      Du <time datetime="2026-10-26">lundi 26</time> au
+                      <time datetime="2026-10-30">vendredi 30 octobre 2026</time>
+                    </p>
+                  </div>
+                  <span class="badge badge--pending">En attente manager</span>
+                </li>
+                <li class="list__item">
+                  <div>
+                    <p class="font-semibold">RTT, 1 jour</p>
+                    <p class="list__meta">
+                      Le <time datetime="2026-11-13">vendredi 13 novembre 2026</time>
+                    </p>
+                  </div>
+                  <span class="badge badge--approved">Validée</span>
+                </li>
+                <li class="list__item">
+                  <div>
+                    <p class="font-semibold">Congés payés, 3 jours</p>
+                    <p class="list__meta">
+                      Du <time datetime="2026-12-28">lundi 28</time> au
+                      <time datetime="2026-12-30">mercredi 30 décembre 2026</time>
+                    </p>
+                  </div>
+                  <span class="badge badge--in-progress">En attente RH</span>
+                </li>
+              </ul>
+            </section>
+
+            <section class="card" aria-labelledby="titre-materiel">
+              <div class="card__header">
+                <h2 id="titre-materiel" class="card__title">Mon matériel</h2>
+              </div>
+              <ul class="list" role="list">
+                <li class="list__item">
+                  <div>
+                    <p class="font-semibold">MacBook Pro 14 pouces</p>
+                    <p class="list__meta">N° de série C02XK1ABMD6T</p>
+                  </div>
+                </li>
+                <li class="list__item">
+                  <div>
+                    <p class="font-semibold">Écran Dell 27 pouces</p>
+                    <p class="list__meta">N° de série CN-0F8H3K</p>
+                  </div>
+                </li>
+                <li class="list__item">
+                  <div>
+                    <p class="font-semibold">Casque Jabra Evolve2</p>
+                    <p class="list__meta">N° de série JB-55821</p>
+                  </div>
+                </li>
+              </ul>
+            </section>
+          </div>
+
+          <section class="mt-5" aria-labelledby="titre-frais">
+            <div class="card__header">
+              <h2 id="titre-frais" class="card__title">Mes dernières notes de frais</h2>
+              <a href="note-frais-nouvelle.html" class="text-sm">Nouvelle note</a>
+            </div>
+            <div class="table-wrapper" role="region" aria-labelledby="titre-frais" tabindex="0">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Date</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Type</th>
+                    <th scope="col" class="table__num">Montant</th>
+                    <th scope="col">Statut</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><time datetime="2026-09-12">12/09/2026</time></td>
+                    <td>Train Lyon - Paris, salon Devoxx</td>
+                    <td>Transport</td>
+                    <td class="table__num">89,50 €</td>
+                    <td><span class="badge badge--pending">En attente manager</span></td>
+                  </tr>
+                  <tr>
+                    <td><time datetime="2026-09-15">15/09/2026</time></td>
+                    <td>Déjeuner client Axelis</td>
+                    <td>Restauration</td>
+                    <td class="table__num">42,00 €</td>
+                    <td><span class="badge badge--approved">Validée</span></td>
+                  </tr>
+                  <tr>
+                    <td><time datetime="2026-09-02">02/09/2026</time></td>
+                    <td>Hôtel, formation Kubernetes</td>
+                    <td>Hébergement</td>
+                    <td class="table__num">128,00 €</td>
+                    <td><span class="badge badge--refunded">Remboursée</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </div>
+      </main>
     </div>
   </body>
 </html>
-
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * The content above * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * * -->
-<!-- * * * * * * * * * * and can be replaced.  * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * End of Placeholder  * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-
 <router-outlet />
