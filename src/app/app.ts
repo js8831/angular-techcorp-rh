@@ -10,7 +10,7 @@ import { LEAVE_TYPE_LABELS, LeaveRequest } from './models/leave-request';
   templateUrl: './app.html',
 })
 export class App {
-  protected readonly title = signal('techcorp-rh');
+  protected readonly title = signal('Techcorp-rh');
   protected readonly currentUser: Employee = {
     id: 1,
     firstName: 'Claire',

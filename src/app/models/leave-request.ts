@@ -12,6 +12,9 @@ export interface LeaveRequest {
 }
 
 // Un obj classique avec des règles strictes sur les types de ses clés et de ses valeurs pour éviter les erreurs,
+// Record<LeaveType, string> est un type utilitaire en TypeScript qui crée un objet dont :
+// Les clés (keys) sont tous les membres du type LeaveType (par exemple : "annual", "sick", etc.).
+// Les valeurs (values) sont obligatoirement de type string.
 export const LEAVE_TYPE_LABELS: Record<LeaveType, string> = {
   paid: 'Congés payés',
   rtt: 'RTT',
