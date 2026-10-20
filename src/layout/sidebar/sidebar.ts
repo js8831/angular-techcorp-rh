@@ -4,9 +4,10 @@ import { Component } from '@angular/core';
   imports: [],
   selector: 'app-sidebar',
   templateUrl: './sidebar.html',
-  // host: {
-  //   '[class]': 'test',
-  // },
+  host: {
+    class: 'app__sidebar',
+    id: 'navigation',
+  },
 })
 export class Sidebar {
   protected readonly test = 'app__sidebar sidebar';

@@ -5,7 +5,7 @@ import { LEAVE_TYPE_LABELS, LeaveRequest } from './models/leave-request';
 import { Sidebar } from '../layout/sidebar/sidebar';
 
 @Component({
-  // ne pas mettre dans les imports les interfaces qui stucturent les données
+  // ne pas mettre dans les imports les interfaces qui types les données
   imports: [RouterOutlet, Sidebar],
   selector: 'app-root',
   styleUrl: './app.css',
