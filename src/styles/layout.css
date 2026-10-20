@@ -15,6 +15,58 @@
    Desktop : en-tete sur toute la largeur, barre laterale fixe a gauche.
    -------------------------------------------------------------------------- */
 
+/* minmax(0, 1fr) : la colonne peut retrecir sous la largeur de son contenu
+   (sinon un tableau large ferait deborder toute la page). */
+.app {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: auto auto 1fr;
+  grid-template-areas:
+    "header"
+    "sidebar"
+    "main";
+  min-height: 100vh;
+}
+
+/* sticky : l'en-tete reste visible au defilement */
+.app__header {
+  grid-area: header;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.app__sidebar {
+  grid-area: sidebar;
+}
+
+.app__main {
+  grid-area: main;
+  padding: var(--space-5) var(--space-4);
+}
+
+@media (min-width: 64em) {
+  .app {
+    grid-template-columns: var(--sidebar-width) minmax(0, 1fr);
+    grid-template-rows: var(--header-height) 1fr;
+    grid-template-areas:
+      "header header"
+      "sidebar main";
+  }
+
+  /* La barre laterale reste fixe sous l'en-tete et defile seule si besoin */
+  .app__sidebar {
+    position: sticky;
+    top: var(--header-height);
+    height: calc(100vh - var(--header-height));
+    overflow-y: auto;
+  }
+
+  .app__main {
+    padding: var(--space-6);
+  }
+}
+
 .container {
   max-width: var(--content-max);
   /* marge de gch et dt (inline) */
@@ -78,6 +130,27 @@
    En-tete de page : titre a gauche, actions a droite (passent dessous sur mobile)
    -------------------------------------------------------------------------- */
 
+/* flex-wrap : les actions passent a la ligne quand la place manque */
+.page-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+}
+
+.page-header__subtitle {
+  margin-top: var(--space-1);
+  color: var(--color-text-muted);
+}
+
+.page-header__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
 /* --------------------------------------------------------------------------
    Grilles reutilisables
    -------------------------------------------------------------------------- */
@@ -87,6 +160,18 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
   gap: var(--space-4);
+}
+
+/* Deux colonnes inegales sur grand ecran, empilees sur mobile. */
+.grid-split {
+  display: grid;
+  gap: var(--space-5);
+}
+
+@media (min-width: 64em) {
+  .grid-split {
+    grid-template-columns: 2fr 1fr;
+  }
 }
 
 /* Empile des blocs avec un espacement regulier sauf sur le premier enfant. */

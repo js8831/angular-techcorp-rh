@@ -15,6 +15,28 @@
   border: 0;
 }
 
+/* Lien d'evitement : hors ecran, il redescend quand il recoit le focus clavier. */
+.skip-link {
+  position: absolute;
+  top: var(--space-2);
+  left: var(--space-2);
+  z-index: 100;
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius);
+  color: var(--color-on-primary);
+  background-color: var(--color-primary);
+  transform: translateY(-200%);
+}
+
+.skip-link:hover,
+.skip-link:focus {
+  color: var(--color-on-primary);
+}
+
+.skip-link:focus {
+  transform: none;
+}
+
 /* à la base en boostrap, permet de donner moins d'importance en éclaircissant le texte */
 .text-muted {
   color: var(--color-text-muted);

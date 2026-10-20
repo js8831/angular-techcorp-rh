@@ -6,9 +6,9 @@
     <button
       class="topbar__menu"
       type="button"
-      data-nav-toggle
-      aria-expanded="false"
+      [attr.aria-expanded]="navOpen()"
       aria-controls="navigation"
+      (click)="toggleNav()"
     >
       <svg
         class="nav__icon"
@@ -27,7 +27,7 @@
     </button>
 
     <a class="brand" href="dashboard-employe.html">
-      <img class="brand__logo" src="assets/logo.svg" alt="" width="32" height="32" />
+      <img class="brand__logo" src="logo.svg" alt="" width="32" height="32" />
       {{ title() }}
     </a>
 
@@ -76,7 +76,7 @@
     </div>
   </header>
 
-  <app-sidebar></app-sidebar>
+  <app-sidebar [open]="navOpen()" />
 
   <!-- tabindex="-1" : la cible du lien d'evitement peut recevoir le focus. -->
   <main class="app__main" id="contenu" tabindex="-1">
@@ -249,7 +249,7 @@
         </div>
       </section>
     </div>
+
+    <router-outlet />
   </main>
 </div>
-
-<router-outlet />
