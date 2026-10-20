@@ -34,12 +34,11 @@ export class App {
   };
 
   protected readonly nextLeaveType = LEAVE_TYPE_LABELS[this.nextLeave.type];
+
+  // Etat d'ouverture de la navigation sur mobile.
+  protected readonly navOpen = signal(false);
+
+  protected toggleNav(): void {
+    this.navOpen.update((open) => !open);
+  }
 }
-
-//   // Etat d'ouverture de la navigation sur mobile.
-//   protected readonly navOpen = signal(false);
-
-//   protected toggleNav(): void {
-//     this.navOpen.update((open) => !open);
-//   }
-// }

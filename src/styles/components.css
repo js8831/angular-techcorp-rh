@@ -169,6 +169,25 @@
   padding-top: var(--space-4);
 }
 
+/* Liste de lignes separees (absences, materiel) */
+.list__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding-block: var(--space-3);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.list__item:last-child {
+  border-bottom: none;
+}
+
+.list__meta {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
 /* ==========================================================================
    4. Indicateur chiffre (tableaux de bord)
    ========================================================================== */
@@ -260,6 +279,13 @@
   padding: var(--space-2);
 }
 
+/* Sur grand ecran la barre laterale est toujours visible : plus besoin du bouton */
+@media (min-width: 64em) {
+  .topbar__menu {
+    display: none;
+  }
+}
+
 .topbar__actions {
   display: flex;
   align-items: center;
@@ -325,9 +351,102 @@ Il surchargera brand dans login mais pas brand dans dashboard car classe non uti
   background-color: var(--color-primary-soft);
 }
 
+.user {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+/* Nom et role masques sur petit ecran : seul l'avatar reste dans la topbar */
+.user__info {
+  display: none;
+}
+
+@media (min-width: 40em) {
+  .user__info {
+    display: block;
+  }
+}
+
+.user__name {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-tight);
+}
+
+.user__role {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+}
+
 /* ==========================================================================
    8. Barre laterale et navigation principale
    ========================================================================== */
+
+/* Mobile : panneau ferme par defaut, ouvert par le bouton menu (classe is-open) */
+.sidebar {
+  display: none;
+  padding: var(--space-4);
+  border-bottom: 1px solid var(--color-border);
+  background-color: var(--color-surface);
+}
+
+.sidebar.is-open {
+  display: block;
+}
+
+@media (min-width: 64em) {
+  .sidebar {
+    display: block;
+    border-bottom: none;
+    border-right: 1px solid var(--color-border);
+  }
+}
+
+.nav__section + .nav__section {
+  margin-top: var(--space-5);
+}
+
+.nav__heading {
+  margin-bottom: var(--space-2);
+  padding-inline: var(--space-3);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.nav__link {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius);
+  font-weight: var(--weight-medium);
+  color: var(--color-text-muted);
+  text-decoration: none;
+  transition:
+    background-color var(--transition),
+    color var(--transition);
+}
+
+.nav__link:hover {
+  color: var(--color-text);
+  background-color: var(--color-surface-muted);
+}
+
+/* Page courante : on s'appuie sur l'attribut ARIA plutot qu'une classe "active" */
+.nav__link[aria-current="page"] {
+  color: var(--color-primary);
+  background-color: var(--color-primary-soft);
+}
 
 /* flex-shrink : gère le retrécissement d'un élément flexible
 dans son conteneur, s'il n y a plus de place = 0 > ne rétrécit pas */

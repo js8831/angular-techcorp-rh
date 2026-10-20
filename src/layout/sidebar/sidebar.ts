@@ -1,14 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
 
 @Component({
   imports: [],
   selector: 'app-sidebar',
   templateUrl: './sidebar.html',
+
+  // Les classes sont posees sur <app-sidebar> : c'est lui l'enfant direct de la grille .app,
+  // pas le <nav> qu'il contient.
   host: {
-    class: 'app__sidebar',
-    id: 'navigation',
+    class: 'app__sidebar sidebar',
+    '[class.is-open]': 'open()',
   },
 })
 export class Sidebar {
-  protected readonly test = 'app__sidebar sidebar';
+  // Etat d'ouverture du panneau sur mobile, pilote par le bouton menu de la topbar.
+  readonly open = input(false);
 }
